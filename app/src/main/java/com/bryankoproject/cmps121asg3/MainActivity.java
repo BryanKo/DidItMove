@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //clear button
-    public void clear (View v){
+    public void clear (View view){
         TextView tvCheck = (TextView) findViewById(R.id.tvCheck);
         tvCheck.setText("Everything was quiet.");
 
@@ -95,10 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Exits the app and stops service
-    public void exit (View v){
-        Log.i("MyService", "Unbinding");
-
-        //quite the service thread and app
+    public void exit (View view){
         unbindService(serviceConnection);
         Log.i(LOG_TAG, "Stopping.");
         Intent intent = new Intent(this, MyService.class);

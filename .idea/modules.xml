@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CMPS121Asg3.iml" filepath="$PROJECT_DIR$/CMPS121Asg3.iml" />
       <module fileurl="file://C:\Users\imbko\AndroidStudioProjects\DidItMove\CMPS121Asg3.iml" filepath="C:\Users\imbko\AndroidStudioProjects\DidItMove\CMPS121Asg3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DidItMove.iml" filepath="$PROJECT_DIR$/DidItMove.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
