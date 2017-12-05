@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView tvCheck = (TextView) findViewById(R.id.tvCheck);
+        tvCheck.setText("Everything was quiet.");
+
         //start the service
         Intent intent = new Intent(this, MyService.class);
         startService(intent);

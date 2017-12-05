@@ -21,11 +21,6 @@ public class MyServiceTask implements Runnable {
 
     public static final String LOG_TAG = "MyService";
     private Context context;
-
-    float xaccel,yaccel;
-    Calendar start;
-    long startAccel;
-    long getStart;
     public static boolean movedFlag = false;
 
     public MyServiceTask(Context _context) {
@@ -34,30 +29,36 @@ public class MyServiceTask implements Runnable {
 
     @Override
     public void run() {
+        final float[] xaccel = new float[1];
+        final float[] yaccel = new float[1];
+        final Calendar[] start = new Calendar[1];
+        final long[] startAccel = new long[1];
+        final long[] getStart = new long[1];
         Random rand = new Random();
 
         // Use phone sensor to detect change
         ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).registerListener (new SensorEventListener() {
-            public void onSensorChanged(SensorEvent event) {
-                // gets the x and y acceleration
-                xaccel = -event.values[0];
-                yaccel = event.values[1];
-                // logs the acceleration
-                Log.d("accel", "x:" + String.valueOf(xaccel) + "y:" + String.valueOf(yaccel));
+            public void onSensorChanged(SensorEvent sensorEvent) {
 
-                start = Calendar.getInstance();
-                getStart = start.getTimeInMillis();
+                // gets the x and y acceleration
+                xaccel[0] = -sensorEvent.values[0];
+                yaccel[0] = sensorEvent.values[1];
+                // logs the acceleration
+                Log.d("acceleration", "x:" + String.valueOf(xaccel[0]) + ", y:" + String.valueOf(yaccel[0]));
+
+                start[0] = Calendar.getInstance();
+                getStart[0] = start[0].getTimeInMillis();
 
                 // determines if phone has moved and get the time it last moved
-                if (getStart - MainActivity.getStart > 30000) {
-                    if (Math.abs(xaccel) > 2 || Math.abs(yaccel) > 2 && movedFlag == false) {
-                        startAccel = start.getTimeInMillis();
+                if (getStart[0] - MainActivity.getStart > 30000) {
+                    if (Math.abs(xaccel[0]) > 2 || Math.abs(yaccel[0]) > 2 && movedFlag == false) {
+                        startAccel[0] = start[0].getTimeInMillis();
                         movedFlag = true;
                         Log.d("phoneMove","true");
                     }
 
                     // tells when to change the text
-                    if (movedFlag == true && (start.getTimeInMillis() - startAccel) > 30000){
+                    if (movedFlag == true && (start[0].getTimeInMillis() - startAccel[0]) > 30000){
                         EventBus.getDefault().post("The phone moved!");
                     }
                 }
